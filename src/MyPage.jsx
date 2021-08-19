@@ -5,6 +5,7 @@ import Main from './components/Main';
 
 const initialTheme = 'light';
 const initialLanguage = 'es';
+const initialAuth = null;
 
 const translations = {
 	es: {
@@ -26,7 +27,7 @@ const translations = {
 		headerDark: 'Dark',
 		buttonLogin: 'Login',
 		buttonLogout: 'Close Session',
-		mainWelcome: 'Welcome',
+		mainWelcome: 'Welcome Guest',
 		mainHello: 'Hello user',
 		mainContent: 'My main content',
 		footerTitle: 'My footer',
@@ -37,6 +38,7 @@ const MyPage = () => {
 	const [theme, setTheme] = useState(initialTheme);
 	const [language, setLanguage] = useState(initialLanguage);
 	const [texts, setTexts] = useState(translations[language]);
+	const [auth, setAuth] = useState(initialAuth);
 
 	const handleTheme = event => setTheme(event.target.value);
 
@@ -47,8 +49,11 @@ const MyPage = () => {
 		} else {
 			setLanguage('en');
 			setTexts(translations.en);
+			setTexts(translations.en);
 		}
 	};
+
+	const handleAuth = event => (auth ? setAuth(null) : setAuth(true));
 
 	return (
 		<div className="my-page">
@@ -57,8 +62,10 @@ const MyPage = () => {
 				handleTheme={handleTheme}
 				texts={texts}
 				handleLanguage={handleLanguage}
+				auth={auth}
+				handleAuth={handleAuth}
 			/>
-			<Main theme={theme} texts={texts} />
+			<Main theme={theme} texts={texts} auth={auth} />
 			<Footer theme={theme} texts={texts} />
 		</div>
 	);
