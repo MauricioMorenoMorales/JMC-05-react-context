@@ -1,4 +1,5 @@
 import MyPage from './MyPage';
+import MyPageContext from './MyPageContext';
 
 function App() {
 	return (
@@ -11,6 +12,8 @@ function App() {
 			>
 				Documentación
 			</a>
+			<hr />
+			<MyPageContext />
 			<hr />
 			<MyPage />
 		</div>

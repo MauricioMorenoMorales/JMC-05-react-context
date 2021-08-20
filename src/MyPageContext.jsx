@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
-import Footer from './components/Footer';
-import Header from './components/Header';
-import Main from './components/Main';
+import FooterContext from './components/FooterContext';
+import HeaderContext from './components/HeaderContext';
+import MainContext from './components/MainContext';
+import { ThemeProvider } from './contexts/ThemeContext';
 
-const initialTheme = 'light';
 const initialLanguage = 'es';
 const initialAuth = null;
 
 const translations = {
 	es: {
-		headerTitle: 'Mi aplicacion SIN Context Api',
+		headerTitle: 'Mi aplicacion CON Context Api',
 		headerSubtitle: 'Mi Cabecera',
 		headerLight: 'Claro',
 		headerDark: 'Oscuro',
@@ -21,7 +21,7 @@ const translations = {
 		footerTitle: 'Mi pie de pagina',
 	},
 	en: {
-		headerTitle: 'My application WITHOUT Context Api',
+		headerTitle: 'My application WITH Context Api',
 		headerSubtitle: 'My Header',
 		headerLight: 'Sure',
 		headerDark: 'Dark',
@@ -34,13 +34,10 @@ const translations = {
 	},
 };
 
-const MyPage = () => {
-	const [theme, setTheme] = useState(initialTheme);
+const MyPageContext = () => {
 	const [language, setLanguage] = useState(initialLanguage);
 	const [texts, setTexts] = useState(translations[language]);
 	const [auth, setAuth] = useState(initialAuth);
-
-	const handleTheme = event => setTheme(event.target.value);
 
 	const handleLanguage = event => {
 		if (event.target.value === 'es') {
@@ -56,18 +53,18 @@ const MyPage = () => {
 
 	return (
 		<div className="my-page">
-			<Header
-				theme={theme}
-				handleTheme={handleTheme}
-				texts={texts}
-				handleLanguage={handleLanguage}
-				auth={auth}
-				handleAuth={handleAuth}
-			/>
-			<Main theme={theme} texts={texts} auth={auth} />
-			<Footer theme={theme} texts={texts} />
+			<ThemeProvider>
+				<HeaderContext
+					texts={texts}
+					handleLanguage={handleLanguage}
+					auth={auth}
+					handleAuth={handleAuth}
+				/>
+				<MainContext texts={texts} auth={auth} />
+				<FooterContext texts={texts} />
+			</ThemeProvider>
 		</div>
 	);
 };
 
-export default MyPage;
+export default MyPageContext;
