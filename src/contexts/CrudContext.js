@@ -98,7 +98,7 @@ const CrudProvider = ({ children }) => {
 		db,
 		deleteData,
 	};
-	return <CrudContext.provider value={data}>{children}</CrudContext.provider>;
+	return <CrudContext.Provider value={data}>{children}</CrudContext.Provider>;
 };
 
 export { CrudProvider };
