@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import CrudContext from '../contexts/CrudContext';
 
 import CrudForm from './CrudForm';
 import CrudTable from './CrudTable';
@@ -6,6 +7,7 @@ import Loader from './Loader';
 import Message from './Message';
 
 const CrudApi = () => {
+	const { dataToEdit, loading, error, db } = useContext(CrudContext);
 	return (
 		<div>
 			<br />
@@ -13,12 +15,7 @@ const CrudApi = () => {
 			<article className="grid-1-2">
 				<h3>{dataToEdit ? 'Editar' : 'Agregar'}</h3>
 				{/* The crud form create and update the data */}
-				<CrudForm
-					createData={createData}
-					updateData={updateData}
-					dataToEdit={dataToEdit}
-					setDataToEdit={setDataToEdit}
-				/>
+				<CrudForm />
 				{loading && <Loader />}
 				{error && (
 					<Message
@@ -28,13 +25,7 @@ const CrudApi = () => {
 				)}
 				{/* CrudApi default function is get the data and store it in the component Crudtable */}
 				{/* When they click on a button inside this component they call the two functions bellow  with the element and elemet.id*/}
-				{db && (
-					<CrudTable
-						data={db}
-						setDataToEdit={setDataToEdit}
-						deleteData={deleteData}
-					/>
-				)}
+				{db && <CrudTable />}
 			</article>
 		</div>
 	);

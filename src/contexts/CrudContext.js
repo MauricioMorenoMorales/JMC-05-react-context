@@ -3,7 +3,7 @@ import { helpHttp } from '../helpers/helpHttp';
 
 const CrudContext = createContext();
 
-const crudProvider = ({ children }) => {
+const CrudProvider = ({ children }) => {
 	const [db, setDb] = useState(null),
 		[dataToEdit, setDataToEdit] = useState(null), // Is used in the <form /> and is activated on the component <crudTable />
 		[error, setError] = useState(null),
@@ -101,5 +101,5 @@ const crudProvider = ({ children }) => {
 	return <CrudContext.provider value={data}>{children}</CrudContext.provider>;
 };
 
-export { crudProvider };
+export { CrudProvider };
 export default CrudContext;

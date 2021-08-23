@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import CrudContext from '../contexts/CrudContext';
 
 const initialForm = {
 	name: '',
@@ -6,7 +7,9 @@ const initialForm = {
 	id: null,
 };
 
-const CrudForm = ({ createData, updateData, dataToEdit, setDataToEdit }) => {
+const CrudForm = () => {
+	const { createData, updateData, dataToEdit, setDataToEdit } =
+		useContext(CrudContext);
 	const [form, setForm] = useState(initialForm); //This data fills the form state
 	//Fills the form with the information to edit when setData to edit is changed on <CrudTable />
 	useEffect(() => {

@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import CrudContext from '../contexts/CrudContext';
 
-const CrudTable = ({ data, setDataToEdit, deleteData }) => {
+const CrudTable = () => {
+	const { db: data, setDataToEdit, deleteData } = useContext(CrudContext);
 	return (
 		<div>
 			<h3>Tabla de Datos</h3>
